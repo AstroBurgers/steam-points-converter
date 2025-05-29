@@ -91,14 +91,18 @@ export default function Home() {
       {/* Show conversion result */}
       {convertedAmount !== null ? (
         <p className="mt-6 text-lg font-semibold">
-          Equivalent in {selectedCurrency}:{" "}
+          {selectedCurrency === "USD"
+            ? "Equivalent in USD:"
+            : `Approximate equivalent in ${selectedCurrency}:`}{" "}
           <span>
             {currencyRates[selectedCurrency].symbol}
             {convertedAmount.toFixed(2)}
           </span>
         </p>
       ) : (
-        <p className="mt-6 text-lg font-semibold">Please enter a valid number.</p>
+        <p className="mt-6 text-lg font-semibold">
+          Please enter a valid number.
+        </p>
       )}
     </div>
   );
