@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const currencyRates: Record<string, { symbol: string; rate: number }> = {
   USD: { symbol: "$", rate: 1 },
-  EUR: { symbol: "€", rate: 0.88 },  // example rates, update as needed
+  EUR: { symbol: "€", rate: 0.88 },
   GBP: { symbol: "£", rate: 0.74 },
   JPY: { symbol: "¥", rate: 144.10 },
   AUD: { symbol: "A$", rate: 1.55 },
