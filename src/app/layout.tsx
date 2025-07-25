@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Steam Points Converter",
-  description: "Steam Points to USD, EUR, GBP, JPY, AUD, and CAD. Be ashamed with your life choices!",
+  description: "Steam Points Calculator to convert your total steam points to USD, EUR, GBP, JPY, AUD, and CAD. Be ashamed with your life choices!",
 };
 
 export default function RootLayout({
