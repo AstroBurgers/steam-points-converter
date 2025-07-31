@@ -35,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
             href="https://ko-fi.com/astrotriesmodding"
           >
             <Image
-              className="pb-4 hover:scale-110 transition duration-300 hover:shadow-md"
+              className="pb-4 transition duration-300 hover:shadow-md"
               alt="Kofi Support Button"
               width={240}
               height={240}

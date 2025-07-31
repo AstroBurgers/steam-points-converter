@@ -102,15 +102,20 @@ export default function Home() {
 
       {/* Show conversion result */}
       {convertedAmount !== null ? (
-        <p className="mt-6 text-lg font-semibold">
-          {selectedCurrency === 'USD'
-            ? 'Equivalent in USD:'
-            : `Approximate equivalent in ${selectedCurrency}:`}{' '}
-          <span>
-            {currencyRates[selectedCurrency].symbol}
-            {convertedAmount.toFixed(2)}
-          </span>
-        </p>
+        <div className="mt-6 text-lg font-semibold">
+          <p>
+            {selectedCurrency === 'USD'
+              ? 'Equivalent in USD:'
+              : `Approximate equivalent in ${selectedCurrency}:`}{' '}
+            <span>
+              {currencyRates[selectedCurrency].symbol}
+              {convertedAmount.toFixed(2)}
+            </span>
+          </p>
+          <p className="text-sm font-normal mt-2">
+            Found this helpful? Buy me a coffee on Ko-fi!
+          </p>
+        </div>
       ) : (
         <p className="mt-6 text-lg font-semibold">Please enter a valid number.</p>
       )}
