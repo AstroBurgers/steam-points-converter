@@ -113,7 +113,9 @@ export default function Home() {
             </span>
           </p>
           <p className="text-sm font-normal mt-2">
-            Found this helpful? Buy me a coffee on Ko-fi!
+            If this helped, <a target="_blank"
+              rel="noopener noreferrer"
+              href="https://ko-fi.com/astrotriesmodding" className="underline transition duration-300 hover:text-gray-400">support me on Ko-fi</a>!
           </p>
         </div>
       ) : (
