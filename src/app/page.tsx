@@ -24,49 +24,40 @@ export default function Home() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-
     if (/^\d*$/.test(val)) {
       setPoints(val);
       const numPoints = parseInt(val, 10);
-      if (!isNaN(numPoints)) {
-        setConvertedAmount(convertPoints(numPoints, selectedCurrency));
-      } else {
-        setConvertedAmount(null);
-      }
+      setConvertedAmount(!isNaN(numPoints) ? convertPoints(numPoints, selectedCurrency) : null);
     }
   };
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const pasted = e.clipboardData.getData('Text').replace(/\D/g, ''); // remove non-digits
+    const pasted = e.clipboardData.getData('Text').replace(/\D/g, '');
     if (pasted) {
-      e.preventDefault(); // prevent default paste behavior
+      e.preventDefault();
       setPoints(pasted);
       const numPoints = parseInt(pasted, 10);
       setConvertedAmount(!isNaN(numPoints) ? convertPoints(numPoints, selectedCurrency) : null);
     }
   };
 
-
   const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCurrency(e.target.value);
     const numPoints = parseInt(points, 10);
-    if (!isNaN(numPoints)) {
-      setConvertedAmount(convertPoints(numPoints, e.target.value));
-    } else {
-      setConvertedAmount(null);
-    }
+    setConvertedAmount(!isNaN(numPoints) ? convertPoints(numPoints, e.target.value) : null);
   };
 
   return (
-    <div className="w-full max-w-xl px-4 sm:px-6 md:px-8">
-      <fieldset className="fieldset w-full">
-        <legend className="fieldset-legend">
-          Input your <b>TOTAL</b> steam points
-        </legend>
+    <div className="flex items-center justify-center px-4">
+      <div className="rounded-xl p-8 w-full max-w-lg glass-gradient">
+        {/* Input Field */}
+        <label className="block font-medium text-base-content mb-2">
+          Enter Your Total Steam Points:
+        </label>
         <input
           type="text"
-          className="input w-full"
-          placeholder="Type here"
+          className="w-full rounded-lg border border-base-300 bg-base-200 text-base-content px-4 py-3 focus:ring-2 focus:ring-accent outline-none transition"
+          placeholder="e.g. 15000"
           value={points}
           onChange={handleInputChange}
           onPaste={handlePaste}
@@ -74,12 +65,13 @@ export default function Home() {
           pattern="\d*"
         />
 
-        <label htmlFor="currency" className="label pt-4 block font-semibold">
+        {/* Currency Selector */}
+        <label htmlFor="currency" className="block font-medium text-base-content mt-6 mb-2">
           Choose Currency:
         </label>
         <select
           id="currency"
-          className="select select-bordered w-full"
+          className="w-full rounded-lg border border-base-300 bg-base-200 text-base-content px-4 py-3 focus:ring-2 focus:ring-accent outline-none transition"
           value={selectedCurrency}
           onChange={handleCurrencyChange}
         >
@@ -90,37 +82,47 @@ export default function Home() {
           ))}
         </select>
 
+        {/* Help Link */}
         <a
           href="https://store.steampowered.com/pointssummary"
-          className="label hover:link transition duration-300 hover:scale-x-110 mt-4 block"
+          className="text-accent text-sm mt-3 block hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Can't find your total points?
+          Can't find your total points? Click here.
         </a>
-      </fieldset>
 
-      {/* Show conversion result */}
-      {convertedAmount !== null ? (
-        <div className="mt-6 text-lg font-semibold">
-          <p>
-            {selectedCurrency === 'USD'
-              ? 'Equivalent in USD:'
-              : `Approximate equivalent in ${selectedCurrency}:`}{' '}
-            <span>
+        {/* Result */}
+        {convertedAmount !== null ? (
+          <div className="mt-8 rounded-lg p-4 bg-base-200 border border-base-300 text-center">
+            <p className="text-lg font-semibold text-base-content">
+              {selectedCurrency === 'USD'
+                ? 'Equivalent in USD:'
+                : `Approximate equivalent in ${selectedCurrency}:`}
+            </p>
+            <p className="text-3xl font-bold text-success mt-2">
               {currencyRates[selectedCurrency].symbol}
               {convertedAmount.toFixed(2)}
-            </span>
+            </p>
+            <p className="text-sm text-base-content/70 mt-3">
+              If this helped,{' '}
+              <a
+                href="https://ko-fi.com/astrotriesmodding"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-accent transition"
+              >
+                support me on Ko-fi
+              </a>
+              !
+            </p>
+          </div>
+        ) : (
+          <p className="mt-6 text-center text-base-content/70">
+            Please enter a valid number to see your conversion.
           </p>
-          <p className="text-sm font-normal mt-2">
-            If this helped, <a target="_blank"
-              rel="noopener noreferrer"
-              href="https://ko-fi.com/astrotriesmodding" className="underline transition duration-300 hover:text-gray-400">support me on Ko-fi</a>!
-          </p>
-        </div>
-      ) : (
-        <p className="mt-6 text-lg font-semibold">Please enter a valid number.</p>
-      )}
+        )}
+      </div>
     </div>
   );
 }

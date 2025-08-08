@@ -7,42 +7,45 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen bg-base-100 text-base-content">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-base-100 to-base-200 text-base-content">
       {/* Header */}
-      <header className="bg-base-200 shadow-lg font-bold">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col items-center">
-          <h1 className="text-lg md:text-xl">Steam Points Converter</h1>
-          <h2 className="text-sm md:text-base text-base-content/70 font-normal">
-            Be ashamed with your life choices!
+      <header className="glass-gradient">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col items-center text-center">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">
+            Steam Points Converter
+          </h1>
+          <h2 className="text-sm md:text-base text-base-content/70 font-normal mt-1">
+            Be ashamed of your life choices… but know their value.
           </h2>
         </div>
       </header>
 
+
       {/* Content */}
-      <main className="flex-grow flex items-center justify-center px-6">
-        {children}
+      <main className="flex-grow flex items-center justify-center px-4 sm:px-6">
+        <div className="w-full max-w-2xl">{children}</div>
       </main>
 
       {/* Footer */}
-      <footer className="footer bg-base-200 sm:footer-horizontal footer-center text-base-content">
-        <aside>
-          <p className="pt-4">
-            © {new Date().getFullYear()} - All rights reserved by Astro
+      <footer className="glass-gradient">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <p className="text-sm">
+            © {new Date().getFullYear()} — All rights reserved by <span className="font-semibold">Astro</span>
           </p>
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://ko-fi.com/astrotriesmodding"
+            className="transition transform hover:scale-105"
           >
             <Image
-              className="pb-4 transition duration-300 hover:shadow-md"
               alt="Kofi Support Button"
               width={240}
               height={240}
               src="/support_me_on_kofi_dark.png"
             />
           </a>
-        </aside>
+        </div>
       </footer>
     </div>
   );
